@@ -7,10 +7,7 @@
   isolation: isolate;
   background: #080a11;
 }
-.video,
-.poster,
-.veil,
-.glow {
+.video, .poster, .veil, .glow {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -39,45 +36,11 @@
     radial-gradient(ellipse at 30% 38%, rgba(104,154,255,.1), transparent 25%),
     radial-gradient(ellipse at 68% 56%, rgba(146,116,255,.08), transparent 27%),
     radial-gradient(ellipse at 52% 78%, rgba(99,188,255,.06), transparent 23%);
-  animation: glow-breathe 20s ease-in-out infinite alternate;
+  animation: ambient-video-glow-breathe 20s ease-in-out infinite alternate;
 }
-@keyframes glow-breathe { from { opacity: .22; } to { opacity: .4; } }
-
-/* Smooth, restrained material transitions; avoid making panels feel springy. */
-:global(.nav),
-:global(.preview),
-:global(.terminal),
-:global(.card),
-:global(.price-card),
-:global(.cta-band),
-:global(.form-wrap),
-:global(.notice),
-:global(.side-nav) {
-  transition:
-    background-color .45s cubic-bezier(.2,.7,.2,1),
-    border-color .45s cubic-bezier(.2,.7,.2,1),
-    box-shadow .55s cubic-bezier(.2,.7,.2,1),
-    backdrop-filter .55s cubic-bezier(.2,.7,.2,1),
-    transform .45s cubic-bezier(.2,.7,.2,1);
-}
-:global(.nav) {
-  background-color: rgba(12,15,25,.58);
-  backdrop-filter: blur(32px) saturate(165%);
-  -webkit-backdrop-filter: blur(32px) saturate(165%);
-}
-:global(.preview),
-:global(.terminal),
-:global(.card),
-:global(.price-card),
-:global(.cta-band),
-:global(.form-wrap),
-:global(.notice) {
-  backdrop-filter: blur(28px) saturate(155%);
-  -webkit-backdrop-filter: blur(28px) saturate(155%);
-}
-:global(.card:hover),
-:global(.price-card:hover) {
-  box-shadow: 0 24px 60px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.14);
+@keyframes ambient-video-glow-breathe {
+  from { opacity: .22; }
+  to { opacity: .4; }
 }
 @media (max-width: 760px) {
   .video { opacity: .32; object-position: 52% center; }
@@ -87,13 +50,4 @@
 @media (prefers-reduced-motion: reduce) {
   .video { display: none; }
   .glow { animation: none; opacity: .28; }
-  :global(.nav),
-  :global(.preview),
-  :global(.terminal),
-  :global(.card),
-  :global(.price-card),
-  :global(.cta-band),
-  :global(.form-wrap),
-  :global(.notice),
-  :global(.side-nav) { transition: none; }
 }

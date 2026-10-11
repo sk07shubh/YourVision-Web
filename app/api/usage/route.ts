@@ -1,0 +1,3 @@
+import {createAdminClient,requireUser} from "@/lib/supabase-server";
+export const dynamic="force-dynamic";
+export async function GET(request:Request){try{const user=await requireUser(request);if(!user)return Response.json({error:"Authentication required."},{status:401});const db=createAdminClient();const {data,error}=await db.rpc("yourvision_get_usage",{p_user_id:user.id});if(error){console.error("usage RPC failed",error.code);return Response.json({error:"Usage service is not configured. Apply the database migration first."},{status:503});}return Response.json(data,{headers:{"Cache-Control":"no-store"}});}catch(e){return Response.json({error:e instanceof Error?e.message:"Usage service unavailable."},{status:503});}}

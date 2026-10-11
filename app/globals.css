@@ -490,8 +490,8 @@ p { margin-top: 0; }
 }
 .nav {
   background-color: rgba(12,15,25,.58);
-  backdrop-filter: blur(32px) saturate(165%);
-  -webkit-backdrop-filter: blur(32px) saturate(165%);
+  backdrop-filter: blur(20px) saturate(165%);
+  -webkit-backdrop-filter: blur(20px) saturate(165%);
 }
 .preview,
 .terminal,
@@ -500,8 +500,8 @@ p { margin-top: 0; }
 .cta-band,
 .form-wrap,
 .notice {
-  backdrop-filter: blur(28px) saturate(155%);
-  -webkit-backdrop-filter: blur(28px) saturate(155%);
+  backdrop-filter: blur(18px) saturate(155%);
+  -webkit-backdrop-filter: blur(18px) saturate(155%);
 }
 .card:hover,
 .price-card:hover {

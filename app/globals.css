@@ -414,7 +414,8 @@ p { margin-top: 0; }
   .footer-grid { gap: 24px 14px; }
 }
 
-/* User-provided atmospheric image + endlessly rising glass particles */
+/* Atmospheric glass background. Keep the base image still so any future cube motion
+   can be isolated and subtle instead of moving the entire scene. */
 .ambient-scene {
   position: fixed;
   z-index: 0;
@@ -426,7 +427,7 @@ p { margin-top: 0; }
 }
 .ambient-scene__image,
 .ambient-scene__veil,
-.ambient-scene__particles {
+.ambient-scene__gap-glow {
   position: absolute;
   inset: 0;
 }
@@ -436,8 +437,6 @@ p { margin-top: 0; }
   background-repeat: no-repeat;
   background-size: cover;
   opacity: .48;
-  transform: scale(1.035);
-  animation: background-breathe 28s ease-in-out infinite alternate;
 }
 .ambient-scene__veil {
   background:
@@ -445,45 +444,18 @@ p { margin-top: 0; }
     linear-gradient(90deg, rgba(7,9,16,.46), transparent 45%, rgba(7,9,16,.18)),
     radial-gradient(ellipse at 50% 38%, transparent 0%, rgba(7,9,16,.18) 72%, rgba(7,9,16,.38) 100%);
 }
-.ambient-scene__particles {
-  perspective: 700px;
-  overflow: hidden;
+/* A very soft, static-cost glow wash; no blur filter or per-frame layout work. */
+.ambient-scene__gap-glow {
+  opacity: .34;
+  background:
+    radial-gradient(ellipse at 30% 38%, rgba(104, 154, 255, .09), transparent 24%),
+    radial-gradient(ellipse at 68% 56%, rgba(146, 116, 255, .075), transparent 25%),
+    radial-gradient(ellipse at 52% 78%, rgba(99, 188, 255, .055), transparent 22%);
+  animation: gap-glow-breathe 18s ease-in-out infinite alternate;
 }
-.ambient-particle {
-  --particle-x: 50vw;
-  --particle-size: 2px;
-  --particle-drift: 18px;
-  --particle-duration: 18s;
-  --particle-delay: -6s;
-  position: absolute;
-  top: calc(100% + 16px);
-  left: var(--particle-x);
-  width: var(--particle-size);
-  height: var(--particle-size);
-  border-radius: 50%;
-  opacity: 0;
-  background: rgba(231, 242, 255, .95);
-  box-shadow: 0 0 8px 2px rgba(159, 202, 255, .32), 0 0 18px rgba(121,103,255,.2);
-  animation: particle-rise var(--particle-duration) linear var(--particle-delay) infinite;
-  will-change: transform, opacity;
-}
-.ambient-particle:nth-child(6n + 1) { --particle-x: 5%; --particle-size: 2px; --particle-drift: 22px; --particle-duration: 20s; --particle-delay: -15s; }
-.ambient-particle:nth-child(6n + 2) { --particle-x: 17%; --particle-size: 1.5px; --particle-drift: -16px; --particle-duration: 16s; --particle-delay: -7s; }
-.ambient-particle:nth-child(6n + 3) { --particle-x: 31%; --particle-size: 3px; --particle-drift: 28px; --particle-duration: 24s; --particle-delay: -20s; }
-.ambient-particle:nth-child(6n + 4) { --particle-x: 53%; --particle-size: 1.5px; --particle-drift: -24px; --particle-duration: 19s; --particle-delay: -12s; }
-.ambient-particle:nth-child(6n + 5) { --particle-x: 72%; --particle-size: 2px; --particle-drift: 14px; --particle-duration: 22s; --particle-delay: -4s; }
-.ambient-particle:nth-child(6n) { --particle-x: 91%; --particle-size: 2.5px; --particle-drift: -30px; --particle-duration: 17s; --particle-delay: -17s; }
-.ambient-particle:nth-child(3n) { filter: blur(.35px); }
-@keyframes particle-rise {
-  0% { transform: translate3d(0, 0, -100px) scale(.65); opacity: 0; }
-  10% { opacity: .68; }
-  52% { opacity: .42; }
-  88% { opacity: .2; }
-  100% { transform: translate3d(var(--particle-drift), -115vh, 100px) scale(1.15); opacity: 0; }
-}
-@keyframes background-breathe {
-  from { transform: scale(1.035) translate3d(0, 0, 0); }
-  to { transform: scale(1.09) translate3d(-.6%, -.35%, 0); }
+@keyframes gap-glow-breathe {
+  from { opacity: .22; }
+  to { opacity: .42; }
 }
 @media (max-width: 760px) {
   .ambient-scene__image { background-position: 52% center; opacity: .38; }
@@ -492,9 +464,8 @@ p { margin-top: 0; }
       linear-gradient(180deg, rgba(7,9,16,.45), rgba(7,9,16,.2) 35%, rgba(7,9,16,.72)),
       linear-gradient(90deg, rgba(7,9,16,.28), transparent);
   }
-  .ambient-particle { box-shadow: 0 0 6px 1px rgba(159,202,255,.26); }
+  .ambient-scene__gap-glow { opacity: .24; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ambient-scene__image { animation: none; }
-  .ambient-particle { animation: none; opacity: .2; }
+  .ambient-scene__gap-glow { animation: none; opacity: .28; }
 }

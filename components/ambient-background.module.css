@@ -16,13 +16,13 @@
 .video {
   object-fit: cover;
   object-position: center;
-  opacity: .42;
-  filter: saturate(.78) contrast(1.06);
-  transform: scale(1.025);
+  opacity: .66;
+  filter: saturate(.9) contrast(1.12);
+  transform: none;
 }
 .poster {
   background: url("/images/liquid-glass-background.jpg") center / cover no-repeat;
-  opacity: .48;
+  opacity: .16;
 }
 .veil {
   background:
@@ -43,8 +43,8 @@
   to { opacity: .4; }
 }
 @media (max-width: 760px) {
-  .video { opacity: .32; object-position: 52% center; }
-  .poster { opacity: .38; background-position: 52% center; }
+  .video { opacity: .56; object-position: 52% center; }
+  .poster { opacity: .12; background-position: 52% center; }
   .glow { opacity: .24; }
 }
 @media (prefers-reduced-motion: reduce) {

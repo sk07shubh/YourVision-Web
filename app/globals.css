@@ -483,11 +483,11 @@ p { margin-top: 0; }
 }
  .ambient-cube {
   position: absolute;
-  width: clamp(54px, 6vw, 92px);
+  width: clamp(62px, 7vw, 108px);
   aspect-ratio: 1;
-  opacity: .68;
+  opacity: .72;
   will-change: transform, opacity;
-  animation: ambient-cube-float 24s ease-in-out infinite alternate;
+  animation: ambient-cube-float 13s ease-in-out infinite alternate;
 }
 .ambient-cube::before,
 .ambient-cube::after {
@@ -505,17 +505,19 @@ p { margin-top: 0; }
 .ambient-cube::after {
   clip-path: polygon(50% 50%, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
 }
-.ambient-cube--one { top: 18%; left: 22%; animation-delay: -7s; }
-.ambient-cube--two { top: 37%; left: 74%; animation-delay: -15s; animation-duration: 29s; }
-.ambient-cube--three { top: 69%; left: 42%; animation-delay: -11s; animation-duration: 26s; opacity: .24; }
-.ambient-cube--four { top: 74%; left: 84%; animation-delay: -20s; animation-duration: 31s; opacity: .22; }
+.ambient-cube--one { top: 18%; left: 22%; animation-delay: -4s; }
+.ambient-cube--two { top: 37%; left: 74%; animation-delay: -9s; animation-duration: 16s; }
+.ambient-cube--three { top: 69%; left: 42%; animation-delay: -6s; animation-duration: 14s; opacity: .42; }
+.ambient-cube--four { top: 74%; left: 84%; animation-delay: -11s; animation-duration: 18s; opacity: .4; }
 @keyframes ambient-image-drift {
-  from { transform: scale(1) translate3d(0, 0, 0); }
-  to { transform: scale(1.055) translate3d(-.6%, .4%, 0); }
+  0% { transform: scale(1.015) translate3d(0, 0, 0); }
+  50% { transform: scale(1.07) translate3d(-.8%, .5%, 0); }
+  100% { transform: scale(1.025) translate3d(.5%, -.3%, 0); }
 }
 @keyframes ambient-cube-float {
-  from { transform: translate3d(0, 2px, 0) scale(.99); opacity: .24; }
-  to { transform: translate3d(0, -6px, 0) scale(1.015); opacity: .4; }
+  0% { transform: translate3d(-10px, 18px, 0) rotate(-5deg) scale(.9); opacity: .2; }
+  50% { transform: translate3d(14px, -22px, 0) rotate(4deg) scale(1.06); opacity: .72; }
+  100% { transform: translate3d(-4px, 10px, 0) rotate(-2deg) scale(.96); opacity: .3; }
 }
 @media (max-width: 760px) {
   .ambient-cube { opacity: .34; width: clamp(44px, 10vw, 66px); }

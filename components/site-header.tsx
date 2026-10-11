@@ -1,0 +1,4 @@
+"use client";
+import Link from "next/link";
+import { useState } from "react";
+export function SiteHeader() { const [open,setOpen] = useState(false); return <header className="site-header"><div className="container nav"><Link href="/" className="brand"><span className="brand-mark">Y</span>YourVision</Link><button className="button small menu-toggle" aria-expanded={open} onClick={()=>setOpen(!open)} aria-label="Toggle navigation">☰</button><nav className={"nav-links "+(open?"open":"")} onClick={()=>setOpen(false)}><Link href="/product">Product</Link><Link href="/how-it-works">How it works</Link><Link href="/docs">Docs</Link><Link href="/pricing">Pricing</Link><Link href="/faq">FAQ</Link></nav><div className="nav-actions"><Link className="button small login-link" href="/login">Log in</Link><Link className="button primary small" href="/signup">Get started ↗</Link></div></div></header>; }

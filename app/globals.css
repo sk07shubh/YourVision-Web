@@ -436,7 +436,9 @@ p { margin-top: 0; }
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: .48;
+  opacity: .62;
+  transform-origin: center;
+  animation: ambient-image-drift 42s ease-in-out infinite alternate;
 }
 .ambient-scene__veil {
   background:
@@ -458,7 +460,7 @@ p { margin-top: 0; }
   to { opacity: .42; }
 }
 @media (max-width: 760px) {
-  .ambient-scene__image { background-position: 52% center; opacity: .38; }
+  .ambient-scene__image { background-position: 52% center; opacity: .46; }
   .ambient-scene__veil {
     background:
       linear-gradient(180deg, rgba(7,9,16,.45), rgba(7,9,16,.2) 35%, rgba(7,9,16,.72)),
@@ -468,6 +470,8 @@ p { margin-top: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ambient-scene__gap-glow { animation: none; opacity: .28; }
+  .ambient-scene__image { animation: none; }
+  .ambient-cube { animation: none; will-change: auto; }
 }
 
 /* Gentle independent cube motion overlay */
@@ -477,11 +481,11 @@ p { margin-top: 0; }
   overflow: hidden;
   pointer-events: none;
 }
-.ambient-cube {
+ .ambient-cube {
   position: absolute;
-  width: clamp(28px, 4vw, 64px);
+  width: clamp(54px, 6vw, 92px);
   aspect-ratio: 1;
-  opacity: .34;
+  opacity: .68;
   will-change: transform, opacity;
   animation: ambient-cube-float 24s ease-in-out infinite alternate;
 }
@@ -490,8 +494,9 @@ p { margin-top: 0; }
   content: "";
   position: absolute;
   inset: 0;
-  border: 1px solid rgba(175, 207, 255, .28);
-  background: linear-gradient(135deg, rgba(164, 199, 255, .07), rgba(127, 112, 255, .015));
+  border: 1px solid rgba(190, 220, 255, .52);
+  background: linear-gradient(135deg, rgba(164, 199, 255, .15), rgba(127, 112, 255, .045));
+  box-shadow: inset 0 0 18px rgba(127, 172, 255, .14), 0 0 14px rgba(114, 155, 255, .08);
 }
 .ambient-cube::before {
   clip-path: polygon(50% 0, 100% 25%, 50% 50%, 0 25%);
@@ -504,12 +509,16 @@ p { margin-top: 0; }
 .ambient-cube--two { top: 37%; left: 74%; animation-delay: -15s; animation-duration: 29s; }
 .ambient-cube--three { top: 69%; left: 42%; animation-delay: -11s; animation-duration: 26s; opacity: .24; }
 .ambient-cube--four { top: 74%; left: 84%; animation-delay: -20s; animation-duration: 31s; opacity: .22; }
+@keyframes ambient-image-drift {
+  from { transform: scale(1) translate3d(0, 0, 0); }
+  to { transform: scale(1.055) translate3d(-.6%, .4%, 0); }
+}
 @keyframes ambient-cube-float {
   from { transform: translate3d(0, 2px, 0) scale(.99); opacity: .24; }
   to { transform: translate3d(0, -6px, 0) scale(1.015); opacity: .4; }
 }
 @media (max-width: 760px) {
-  .ambient-cube { opacity: .18; }
+  .ambient-cube { opacity: .34; width: clamp(44px, 10vw, 66px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .ambient-cube { animation: none; will-change: auto; }

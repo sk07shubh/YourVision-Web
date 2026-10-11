@@ -35,6 +35,12 @@ export function SiteHeader() {
               {link.label}
             </Link>
           ))}
+          {open && (
+            <>
+              <Link className="button small" href="/login" onClick={() => setOpen(false)}>Log in</Link>
+              <Link className="button primary small" href="/signup" onClick={() => setOpen(false)}>Get started ↗</Link>
+            </>
+          )}
         </nav>
         <div className="nav-actions">
           <Link className="button small" href="/login">Log in</Link>

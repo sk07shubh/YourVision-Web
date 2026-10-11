@@ -10,6 +10,10 @@ export function AmbientBackground() {
         muted
         loop
         playsInline
+        onLoadedMetadata={(event) => {
+          // Slower motion without adding a JavaScript animation loop.
+          event.currentTarget.playbackRate = 0.45;
+        }}
         preload="metadata"
         poster="/images/liquid-glass-background.jpg"
         disablePictureInPicture
